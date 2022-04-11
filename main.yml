@@ -1,0 +1,4 @@
+- name: Install and configure nvm
+  hosts: all
+  roles: 
+        - NvimConfiguration
