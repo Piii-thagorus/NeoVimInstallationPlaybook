@@ -7,7 +7,7 @@
       update_cache: yes
       name:
           - neovim
-      state: present
+      state: latest
 
 
 - name: Creating Nvim config directory
@@ -30,8 +30,10 @@
         backup: yes
 
 
-- name: Include plugin tasks
-  include_tasks: 
-        file: Nvim_plugins.yml
-        apply:
-            tags: PlugInstall
+
+
+- name: Include Coc installation
+  include_tasks:
+      file: coc_config.yml
+      apply:
+          tags: CocInstall

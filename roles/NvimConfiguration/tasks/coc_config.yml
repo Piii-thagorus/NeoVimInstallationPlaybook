@@ -1,0 +1,16 @@
+#Install and configure coc
+- name: Install nodejs
+  become: true
+  apt:
+      name: nodejs
+      state: latest
+
+- name: Install COC
+  git:
+      repo: https://github.com/neoclide/coc.nvim.git
+      dest: "{{plugins_dir}}/coc.nvim"
+      version: release
+
+- name: Install coc-extensions
+  shell : "nvim -c 'CocInstall -sync {{item}}'"
+  with_items: "{{coc_extensions}}"

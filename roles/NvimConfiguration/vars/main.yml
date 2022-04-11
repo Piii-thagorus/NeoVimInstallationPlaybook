@@ -1,3 +1,14 @@
 ---
 # vars file for NvimConfiguration
 plugins_dir: "{{host_home_dir}}/.local/share/nvim/plugged"
+coc_extensions:
+    - coc-json
+    - coc-html
+    - coc-pairs
+    - coc-pyright
+    - coc-css
+    - coc-yaml
+    - coc-java
+    - coc-angular
+    - coc-tsserver
+    - coc-xml
