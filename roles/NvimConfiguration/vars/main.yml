@@ -1,2 +1,3 @@
 ---
 # vars file for NvimConfiguration
+plugins_dir: "{{host_home_dir}}/.local/share/nvim/plugged"

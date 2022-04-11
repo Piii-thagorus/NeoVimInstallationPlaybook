@@ -28,3 +28,10 @@
         src: "{{host_home_dir}}/.config/nvim/init.vim"
         mode: 0767
         backup: yes
+
+
+- name: Include plugin tasks
+  include_tasks: 
+        file: Nvim_plugins.yml
+        apply:
+            tags: PlugInstall
