@@ -1,39 +1,50 @@
 ---
 # tasks file for NvimConfiguration
-- name: Install NeoVim
-  become: true
-  ansible.builtin.apt:
-      force_apt_get: yes
-      update_cache: yes
-      name:
-          - neovim
-      state: latest
+
+- name: Installing packages for Debian_based
+  include_tasks:
+      file: debian_based.yml
+  when: ansible_os_family == "Debian"
+
+
+- name: Installing packages for Arch_based
+  include_tasks:
+      file: arch_based.yml
+  when: ansible_os_family == "Archlinux"
+
+
+- name: Installing packages for RedHat_based
+  include_tasks:
+      file: redhat_based.yml
+  when: ansible_os_family == "RedHat"
 
 
 - name: Creating Nvim config directory
   ansible.builtin.file:
-      dest: "{{ansible_user_dir}}/.config/nvim"
+      dest: "/home/{{user_name}}/.config/nvim"
       state: directory
       mode: 0767
-
-
-- name: Setting host HOME variable
-  ansible.builtin.set_fact:
-        host_home_dir: "{{ lookup('env', 'HOME')}}"
+  become_user: "{{user_name}}"
 
 
 - name: Creating Nvim config file
+  become_user: "{{user_name}}"
   ansible.builtin.copy: 
-        dest: "{{ansible_env.HOME}}/.config/nvim/init.vim"
-        src: "{{host_home_dir}}/.config/nvim/init.vim"
+        dest: "/home/{{user_name}}/.config/nvim/init.vim"
+        src: "{{ lookup('env', 'HOME') }}/.config/nvim/init.vim"
         mode: 0767
         backup: yes
 
 
-
+- name: Include Nvim plugins installation
+  include_tasks:
+      file: Nvim_plugins.yml
+      apply:
+          tags: CocInstall
 
 - name: Include Coc installation
   include_tasks:
       file: coc_config.yml
       apply:
           tags: CocInstall
+

@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+The purpose of this role is to install nvim and convert it into a light weight ide
 
 Requirements
 ------------

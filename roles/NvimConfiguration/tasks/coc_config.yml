@@ -1,9 +1,13 @@
 #Install and configure coc
 - name: Install nodejs
   become: true
-  apt:
-      name: nodejs
+  package:
+      name: "{{item}}" 
       state: latest
+      update_cache: yes
+  loop:
+      - nodejs
+      - npm
 
 - name: Install COC
   git:
@@ -11,6 +15,3 @@
       dest: "{{plugins_dir}}/coc.nvim"
       version: release
 
-- name: Install coc-extensions
-  shell : "nvim -c 'CocInstall -sync {{item}}'"
-  with_items: "{{coc_extensions}}"

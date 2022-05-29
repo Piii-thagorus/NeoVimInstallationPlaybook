@@ -1,0 +1,8 @@
+
+- block:
+    - name: Install NeoVim
+      community.general.pacman:
+        update_cache: yes
+        name: neovim
+        state: latest
+

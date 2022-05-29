@@ -1,6 +1,6 @@
 ---
 # vars file for NvimConfiguration
-plugins_dir: "{{host_home_dir}}/.local/share/nvim/plugged"
+plugins_dir: "/home/{{user_name}}/.local/share/nvim/plugged"
 coc_extensions:
     - coc-json
     - coc-html
